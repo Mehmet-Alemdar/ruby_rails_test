@@ -10,8 +10,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users
-      resources :facts
+      resources :users do
+        collection do
+          delete 'destroy_all'
+        end
+      end
+      resources :facts do
+        collection do
+          delete 'destroy_all'
+        end
+      end
     end
   end
 end
