@@ -10,8 +10,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    if params[:user].nil? || params[:user][:username].nil? || params[:user][:password].nil?
-      render json: { error: 'Username and password are required' }, status: :unprocessable_entity
+    if params[:user].nil? || params[:user][:username].nil? || params[:user][:password].nil? || params[:user][:email].nil?
+      render json: { error: 'Username, password and email are required' }, status: :unprocessable_entity
     else
       @user = User.new(user_params)
       if @user.save
@@ -42,6 +42,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :email)
   end
 end
